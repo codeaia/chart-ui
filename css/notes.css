@@ -1,0 +1,40 @@
+.dots {
+    fill: rgb(251, 117, 96);
+    stroke: rgb(255, 255, 255);
+    stroke-width: 3;
+}
+
+.yaxis path {
+  fill: none;
+  stroke: white;
+}
+
+.xaxis path {
+  fill: none;
+  stroke: white;
+}
+
+.tick text {
+	fill: white;
+	font-size: 12px;
+
+}
+
+.tick line {
+  	stroke: white;
+	stroke-width: 2;
+}
+svg{
+
+	background: rgba(41, 41, 41, 0.75);
+
+}
+
+#chart1
+{
+
+	
+	  -webkit-filter: blur(10px); /* Chrome, Opera, etc. */
+  filter: url('blur.svg#blur'); /* Older FF and others - http://jordanhollinger.com/media/blur.svg */
+  filter: blur(10px); /* Firefox 35+, eventually all */
+}
