@@ -14,9 +14,11 @@
   stroke: white;
 }
 
+
+
 .tick text {
 	fill: white;
-	font-size: 12px;
+	font-size: 18px;
 
 }
 
@@ -30,7 +32,11 @@ svg{
 
 }
 
-#chart1
+#chart1s
 {
 
+
+	  -webkit-filter: blur(5px); /* Chrome, Opera, etc. */
+  filter: url('blur.svg#blur'); /* Older FF and others - http://jordanhollinger.com/media/blur.svg */
+  filter: blur(10px); /* Firefox 35+, eventually all */
 }

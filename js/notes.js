@@ -2,6 +2,8 @@
 
 $(document).ready(function(){
 
+//https://raw.githubusercontent.com/codeaia/chart-ui/gh-pages/data1.json
+//http://localhost:8000/data1.json
 	d3.json("https://raw.githubusercontent.com/codeaia/chart-ui/gh-pages/data1.json", 
 		function(error, data){
 			if (error) return console.warn(error);
@@ -54,15 +56,30 @@ $(document).ready(function(){
   				.attr('transform', 'translate(' + padding + ',' + padding + ')'); //Whole chart
 			
 
-			var c = chartsvg.selectAll("circle")
+
+
+			var dotsg = chartsvg.selectAll("g.dotsg")
 				.data(d)
 				.enter()
-				.append("circle")
-				.attr("class","dots")
-				.attr("cx",function(d){return note_scale(d.note1)})
-				.attr("cy", function(d){return value_scale(d.value)})
-				.attr("r", dotRadius);
-//		console.log(c);
+				.append("g")
+				.attr("class","dotsg")
+
+				dotsg.append("circle")
+					.attr("class","dots")
+					.attr("cx",function(d){return note_scale(d.note1)})
+					.attr("cy", function(d){return value_scale(d.value)})
+					.attr("r", dotRadius)
+				
+				dotsg.append("text")
+					.text(function(d){return d.value})
+					.attr("class","valueText")
+					.attr("x",function(d){return note_scale(d.note1)+15})
+					.attr("y", function(d){return value_scale(d.value)+15})
+					.style("display","none")
+
+
+
+
 /*
 		var cattr = c
 			.attr("cx",function(d){return d.note1;})
@@ -118,8 +135,12 @@ $(document).ready(function(){
 			chartsvg.append("svg:g")
 				.attr("class" , "xaxis")
 				.attr("transform", "translate(0," + height + ")")
-				.call(xAxis)
-
+				.call(xAxis);
+				/*
+				.selectAll("text")
+				.attr("transform",function(){return "rotate(-55)"})
+				*/
+				
 
 			chartsvg.append("svg:g")
 				.attr("class" , "yaxis")
@@ -140,18 +161,45 @@ $(document).ready(function(){
 				$(this).animate({'stroke': 'rgb(255, 173, 6)','stroke-width': dotStroke+3},100)
 				//cx = parseInt($(this).attr("cx")) + 5;
 				//$(this).attr("cx",""+cx)
-
-			
+				//$(this).parent().find("text").show();			
 			})
 
-			$(".dots").on('mouseleave',function(){
+				$(".dots").on('mouseleave',function(){
+				$(this).animate({'stroke': 'rgb(255, 173, 6)','stroke-width': 0},100)
 				$(this).animate({'stroke': 'rgb(141, 140, 137)','stroke-width': dotStroke},100)
+				//$(this).parent().find("text").hide();
 				//cx =  parseInt($(this).attr("cx")) - 5;
 				//$(this).attr("cx",""+cx);
 			})
 
 
-			
+		dotsg.on("mouseenter",function(d,i){
+			g = d3.select(this);
+			circle = g.select("circle");
+			text = g.select(".valueText");
+			text.style("display","block");
+			text.text(d.name + " "+ d.note + " : " + d.value)
+			//circle.attr("r",d.value/10);
+		})
+
+		dotsg.on("mouseleave",function(d,i){
+			g = d3.select(this);
+			circle = g.select("circle");
+			text = g.select(".valueText");
+			text.style("display","none");
+			//circle.attr("r",dotRadius);
+		})
+
+
+
+
+
+
+
+
+
+
+
 			var a = function(){
 				$('.dots').animate({'fill' : 'rgb(251, 117, 96)','stroke': 'rgb(245, 34, 18)','stroke-width': dotStroke + 16},400)
 				$('.dots').animate({'fill' : 'rgb(251, 117, 96)','stroke': 'rgb(245, 34, 18)','stroke-width': dotStroke - 2},200)

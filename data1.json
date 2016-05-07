@@ -2,7 +2,7 @@
   {
     "id": "120315001",
     "name": "A",
-    "note": "midterm",
+    "note": "Midterm",
     "note1": "1",
     "value": "28"
 
@@ -10,42 +10,42 @@
   {
     "id": "120315001",
     "name": "A",
-    "note": "hw1",
+    "note": "Hw1",
     "note1": "2",
     "value": "90"
   },
   {
     "id": "120315001",
     "name": "A",
-    "note": "hw2",
+    "note": "Hw2",
     "note1": "3",
     "value": "95"
   },
   {
     "id": "120315001",
     "name": "A",
-    "note": "hw3",
+    "note": "Hw3",
     "note1": "4",
     "value": "10"
   },
   {
     "id": "120315001",
     "name": "A",
-    "note": "quiz",
+    "note": "Quiz",
     "note1": "5",
     "value": "30"
   },
   {
     "id": "120315001",
     "name": "A",
-    "note": "final",
+    "note": "Final",
     "note1": "6",
     "value": "37"
   },
   {
     "id": "120315001",
     "name": "A",
-    "note": "average",
+    "note": "Average",
     "note1": "7",
     "value": "40"
   }
