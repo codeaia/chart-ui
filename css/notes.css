@@ -33,8 +33,4 @@ svg{
 #chart1
 {
 
-	
-	  -webkit-filter: blur(10px); /* Chrome, Opera, etc. */
-  filter: url('blur.svg#blur'); /* Older FF and others - http://jordanhollinger.com/media/blur.svg */
-  filter: blur(10px); /* Firefox 35+, eventually all */
 }
