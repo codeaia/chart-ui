@@ -26,17 +26,36 @@
   	stroke: white;
 	stroke-width: 2;
 }
-svg{
+.chartsvg{
 
-	background: rgba(41, 41, 41, 0.75);
+    background: rgba(83, 74, 72, .60);
+
 
 }
 
-#chart1s
-{
+#blurdiv{
+	  display: inline-block;
 
+   z-index: -2;
+  position: absolute;
 
-	  -webkit-filter: blur(5px); /* Chrome, Opera, etc. */
-  filter: url('blur.svg#blur'); /* Older FF and others - http://jordanhollinger.com/media/blur.svg */
-  filter: blur(10px); /* Firefox 35+, eventually all */
+    background-image:url('../image.jpg');
+    background-size:cover;
+    -webkit-filter: blur(25px);
+    -moz-filter: blur(4px);
+    -ms-filter: blur(4px);
+    -o-filter: blur(4px);
+    filter: blur(8px);
 }
+
+#chart1{
+
+}
+
+body{
+	    background-size:cover;
+
+}
+
+
+

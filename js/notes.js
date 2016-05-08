@@ -15,9 +15,18 @@ $(document).ready(function(){
   			dotStroke = dotRadius - 2;
 
 
-
   			innerTickSize = 5;
   			outerTickSize = 2;
+
+
+
+
+     
+
+
+
+
+
 
 //SCALE
 /*
@@ -32,29 +41,69 @@ $(document).ready(function(){
 	}); 
 */
 
-	//x axis
+	//x scale
 	note_scale = d3.scale.linear()
 		.domain([0,7])
 		.range([0,width]);
 
-	//y axis
+	//y scale
 	value_scale = d3.scale.linear()
 		.domain([0,100])
 		.range([height,0]);
+
+
+//ZOOM
+		
+ 
+         function zoomed() {
+            chartsvg.attr("transform", "translate(" + d3.event.translate + ")" + 
+               "scale(" + d3.event.scale + ")");
+         };
+  			var zoom = d3.behavior.zoom()
+  				.scaleExtent([0.75,7])
+  				.on("zoom",zoomed);
+
+
+
+//BLUR
+var blurDiv = d3.select("#blurdiv")
+  				.style("height", height +padding*2 + "px")
+  				.style("width",width + padding*2 +  "px")
+  				.attr("align","center");
+  				/*
+  				blurSvg.append("defs")
+  					.append("filter")
+  						.attr("id","blur")
+  						.attr("x","0")
+  						.attr("y","0")
+  						.append("feGaussianBlur")
+  							.attr("in","SourceGraphic")
+  							.attr("stdDeviation","155"); //Overlay
+
+
+  				blurSvg.style("filter","url(#blur)")
+*/
+
 
 
 
 
 
 //DRAW
-
-  			var chartsvg = d3.select("#chart1").append("svg")
+	
+  			var wholesvg = d3.select("#chart1").append("svg")
   				.attr("height", height+padding*2)
   				.attr("width",width+padding*2)
-  				.append('g')
+  				.attr("class","chartsvg")
+  				.call(zoom);
+
+  				var chartsvg = wholesvg.append('g')
   				.attr("class","chart")
-  				.attr('transform', 'translate(' + padding + ',' + padding + ')'); //Whole chart
-			
+  				.attr('transform', 'translate(' + padding + ',' + padding + ')')
+  				
+  				 //Whole chart
+				
+
 
 
 
@@ -96,6 +145,9 @@ $(document).ready(function(){
 				chartsvg.selectAll("circle")
 					.attr("type",function(d){return d.note;})
 					.attr("value",function(d){return d.value;})
+
+
+
 
 
 
@@ -262,5 +314,4 @@ $(document).ready(function(){
 
 
 })
-
 
