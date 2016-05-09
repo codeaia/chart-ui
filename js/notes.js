@@ -8,9 +8,9 @@ $(document).ready(function(){
 		function(error, data){
 			if (error) return console.warn(error);
   			d=data 
-  			height = 500;
-  			width = 600;
-  			padding = 50;
+  			height = 450;
+  			width = 550;
+  			padding = 100;
   			dotRadius = height/50;
   			dotStroke = dotRadius - 2;
 
@@ -21,35 +21,20 @@ $(document).ready(function(){
 
 
 
-     
-
-
-
-
-
-
 //SCALE
-/*
-	xDomain = d3.extent(d,function(i){
-		return parseInt(i.note1)
-	});
 
 
-
-	yDomain = d3.extent(data,function(i){
-		return parseInt(i.value)
-	}); 
-*/
-
-	//x scale
-	note_scale = d3.scale.linear()
-		.domain([0,7])
-		.range([0,width]);
+	var note_scale = d3.scale.linear()
+		.domain([1,7])
+		.range([0,width])
+		//.range();
 
 	//y scale
-	value_scale = d3.scale.linear()
+	var value_scale = d3.scale.linear()
 		.domain([0,100])
 		.range([height,0]);
+		
+		
 
 
 //ZOOM
@@ -66,24 +51,11 @@ $(document).ready(function(){
 
 
 //BLUR
-var blurDiv = d3.select("#blurdiv")
+		var blurDiv = d3.select("#blurdiv")
   				.style("height", height +padding*2 + "px")
   				.style("width",width + padding*2 +  "px")
   				.attr("align","center");
-  				/*
-  				blurSvg.append("defs")
-  					.append("filter")
-  						.attr("id","blur")
-  						.attr("x","0")
-  						.attr("y","0")
-  						.append("feGaussianBlur")
-  							.attr("in","SourceGraphic")
-  							.attr("stdDeviation","155"); //Overlay
-
-
-  				blurSvg.style("filter","url(#blur)")
-*/
-
+  				
 
 
 
@@ -105,77 +77,11 @@ var blurDiv = d3.select("#blurdiv")
 				
 
 
-
-
-			var dotsg = chartsvg.selectAll("g.dotsg")
-				.data(d)
-				.enter()
-				.append("g")
-				.attr("class","dotsg")
-
-				dotsg.append("circle")
-					.attr("class","dots")
-					.attr("cx",function(d){return note_scale(d.note1)})
-					.attr("cy", function(d){return value_scale(d.value)})
-					.attr("r", dotRadius)
-				
-				dotsg.append("text")
-					.text(function(d){return d.value})
-					.attr("class","valueText")
-					.attr("x",function(d){return note_scale(d.note1)+15})
-					.attr("y", function(d){return value_scale(d.value)+15})
-					.style("display","none")
-
-
-
-
-/*
-		var cattr = c
-			.attr("cx",function(d){return d.note1;})
-			.attr("cy", function(d){return d.value;})
-			.attr("radius", "5")
-			console.log(c);
-*/			
-
-
-			
-				//c = chartsvg.selectAll("circle")
-
-
-				chartsvg.selectAll("circle")
-					.attr("type",function(d){return d.note;})
-					.attr("value",function(d){return d.value;})
-
-
-
-
-
-
-
-
-
-
-
-//LINES
-/*
-			line = d3.svg.line()
-				.x(function(d) {return d.note1})
-				.y(function(d) {return d.value})
-
-			d3.select(".chart").append("svg:path")
-				.attr("class", "line")
-				.attr("d", line(data));
-
-*/
-
-
-//AXISES
+	//AXISES
 			xAxis = d3.svg.axis().scale(note_scale)
 				.orient("bottom")
 				.ticks(7)
 				.tickSize(innerTickSize,outerTickSize)
-
-				//.ticks(["e", "Midterm", "HW1", "HW2", "HW3", "Quiz", "Final", "Average"])
 
 			yAxis = d3.svg.axis().scale(value_scale)
 				.orient("left")
@@ -186,12 +92,9 @@ var blurDiv = d3.select("#blurdiv")
 			 
 			chartsvg.append("svg:g")
 				.attr("class" , "xaxis")
-				.attr("transform", "translate(0," + height + ")")
+				.attr("transform", "translate(40," + height + ")")
 				.call(xAxis);
-				/*
-				.selectAll("text")
-				.attr("transform",function(){return "rotate(-55)"})
-				*/
+				
 				
 
 			chartsvg.append("svg:g")
@@ -200,28 +103,73 @@ var blurDiv = d3.select("#blurdiv")
 				.call(yAxis)
 
 
-			
+			ticks = d3.selectAll(".xaxis .tick text")
+				.data(d)
+				.text(function(d){return d.note});
+
+		//LINES
+	
+
+			line = d3.svg.line()
+				.x(function(d) {return note_scale(d.note1)})
+				.y(function(d) {return value_scale(d.value)});
 
 
+			var lines = chartsvg.append("path")
+				.data([d])
+				.attr("class", "line")
+				.attr("d", line(d) )
+				.attr("transform", "translate(40,0)")
+
+
+
+		//DOTS GROUP(each of them contains a circle and text)
+
+
+			var dotsg = chartsvg.selectAll("g.dotsg")
+				.data(d)
+				.enter()
+				.append("g")
+				.attr("class","dotsg")
+				.attr("transform", "translate(40,0)")
+
+				dotsg.append("circle")
+					.attr("class","dots")
+					.attr("cx",function(d){return note_scale(d.note1)})
+					.attr("cy", function(d){return value_scale(d.value)})
+					.attr("r", dotRadius)
+				
+				dotsg.append("text")
+					.text(function(d){return d.value})
+					.attr("class","valueText")
+					.attr("x",function(d){return note_scale(d.note1)})
+					.attr("y", function(d){return value_scale(d.value)-25})
+					.style("display","none")
+					.attr("text-anchor", "middle");
+
+
+				//NAME
+					var name = wholesvg.append("text")
+						.data(d)
+						.attr("class","nameText")
+						.text(function(d){return d.name})
+						.attr("x" , (width+(2*padding))/2)
+						.attr("y", height+2*padding-15)
+						.attr("text-anchor", "middle")
 
 
 //STYLE AND LISTENERS
 
 		$(".dots").on('mouseenter',function(){
 				$(this).animate({'stroke': 'rgb(141, 140, 137)','stroke-width': 0},100)
-
 				$(this).animate({'stroke': 'rgb(255, 173, 6)','stroke-width': dotStroke+3},100)
-				//cx = parseInt($(this).attr("cx")) + 5;
-				//$(this).attr("cx",""+cx)
-				//$(this).parent().find("text").show();			
+							
 			})
 
 				$(".dots").on('mouseleave',function(){
 				$(this).animate({'stroke': 'rgb(255, 173, 6)','stroke-width': 0},100)
 				$(this).animate({'stroke': 'rgb(141, 140, 137)','stroke-width': dotStroke},100)
-				//$(this).parent().find("text").hide();
-				//cx =  parseInt($(this).attr("cx")) - 5;
-				//$(this).attr("cx",""+cx);
+				
 			})
 
 
@@ -230,8 +178,8 @@ var blurDiv = d3.select("#blurdiv")
 			circle = g.select("circle");
 			text = g.select(".valueText");
 			text.style("display","block");
-			text.text(d.name + " "+ d.note + " : " + d.value)
-			//circle.attr("r",d.value/10);
+			text.text(d.value)
+
 		})
 
 		dotsg.on("mouseleave",function(d,i){
@@ -239,18 +187,8 @@ var blurDiv = d3.select("#blurdiv")
 			circle = g.select("circle");
 			text = g.select(".valueText");
 			text.style("display","none");
-			//circle.attr("r",dotRadius);
+
 		})
-
-
-
-
-
-
-
-
-
-
 
 			var a = function(){
 				$('.dots').animate({'fill' : 'rgb(251, 117, 96)','stroke': 'rgb(245, 34, 18)','stroke-width': dotStroke + 16},400)
@@ -262,56 +200,11 @@ var blurDiv = d3.select("#blurdiv")
 
 
 
-			var b = function(){
-				$('.dots').animate({'stroke': 'rgb(245, 34, 18)','stroke-width': dotStroke + 2},300)
-				$('.dots').animate({'stroke': 'rgb(245, 34, 18)','stroke-width': 0},100)
-
-				//$('.dots').animate({'stroke': 'rgb(245, 34, 18)','stroke-width': dotStroke},150)
-
-			}
-			
-
-			var c = function(){
-
-				$('.dots').css({'fill' : 'rgb(251, 117, 96)','stroke': 'rgb(141, 140, 137)'})
-				//$('.dots').animate({'fill' : 'rgb(251, 117, 96)','stroke': 'rgb(141, 140, 137)','stroke-width': dotStroke + 2},500)
-				//$('.dots').animate({'fill' : 'rgb(251, 117, 96)','stroke': 'rgb(141, 140, 137)','stroke-width': 0},500)
-				$('.dots').attr("r", dotRadius + 2);
-				//$('.dots').animate({'stroke-width': dotStroke + 2, "fill" : "rgb(141, 140, 137)"},300)
-
-
-
-				//$('.dots').css({'fill' : 'rgb(141, 140, 137)','stroke': 'rgb(251, 117, 96)'})
-				$('.dots').animate({'fill' : 'rgb(141, 140, 137)','stroke': 'rgb(251, 117, 96)','stroke-width': dotStroke + 2},200)
-				$('.dots').attr("r", dotRadius);
-				//$('.dots').animate({'fill' : 'rgb(141, 140, 137)','stroke': 'rgb(251, 117, 96)','stroke-width': 0},200)
-
-				//$('.dots').animate({'fill' : "rgb(141, 140, 137)",'stroke': 'rgb(251, 117, 96)','stroke-width': dotStroke + 2},500)
-				//$('.dots').animate({'fill' : "rgb(41, 140, 137)",'stroke': 'rgb(251, 117, 961)','stroke-width': 0},500)
-
-
-				//$('.dots').animate({'stroke': 'rgb(245, 34, 18)','stroke-width': dotStroke},150)
-
-			}
-
-
 			setTimeout(a,300);
 
-			//setInterval(c,200);
-
-
-
-
+			
 
   		})//end of callback function
-
-
-
-
-
-
-
-
 
 })
 
