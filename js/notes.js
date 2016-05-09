@@ -3,7 +3,7 @@
 $(document).ready(function(){
 
 //https://raw.githubusercontent.com/codeaia/chart-ui/gh-pages/data1.json
-//http://localhost:8000/data1.json
+//http://localhost:8000/data1.json 
 	d3.json("https://raw.githubusercontent.com/codeaia/chart-ui/gh-pages/data1.json", 
 		function(error, data){
 			if (error) return console.warn(error);
