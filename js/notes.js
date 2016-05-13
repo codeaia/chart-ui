@@ -2,7 +2,7 @@
 
 $(document).ready(function(){
 
-	d3.json("https://github.com/codeaia/chart-ui/blob/master/data1.json", 
+	d3.json("https://raw.githubusercontent.com/codeaia/chart-ui/gh-pages/data1.json", 
 		function(error, data){
 			if (error) return console.warn(error);
   			d=data 
