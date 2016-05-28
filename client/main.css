@@ -1,0 +1,85 @@
+.card-custom-bg{
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.card-center-v{
+  margin-top: 100px;
+}
+
+.card-width{
+  width: 450px;
+}
+
+.opaque{
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dots {
+    fill: rgb(36, 172, 206);
+    stroke: rgb(255, 255, 255);
+    stroke-width: 3;
+}
+
+.yaxis path {
+    fill: none;
+    stroke: white;
+}
+
+.xaxis path {
+    fill: none;
+    stroke: white;
+}
+
+.tick text {
+  	fill: white;
+	   font-size: 18px;
+}
+.tick line {
+    stroke: white;
+	   stroke-width: 2;
+}
+.chartsvg{
+    background: rgba(36, 40, 46, .81);
+}
+
+#blurdiv{
+	  display: inline-block;
+    z-index: -2;
+    position: absolute;
+    background-image:url('../image.jpg');
+    background-size:cover;
+    opacity: 0;
+    -webkit-filter: blur(25px);
+    -moz-filter: blur(4px);
+    -ms-filter: blur(4px);
+    -o-filter: blur(4px);
+    filter: blur(8px);
+}
+
+#chart1{
+
+}
+
+body{
+	  background-size:cover;
+	  background-color: rgb(244, 133, 108);
+}
+
+.line{
+	  stroke:rgb(65, 200, 235);
+	  fill:none;
+	  stroke-width: 2;
+}
+
+text{
+	  font-family: Helvetica;
+	  fill: white;
+}
+
+.valueText{
+	  font-size: 20px;
+}
+
+.nameText{
+  	font-size: 40px;
+}

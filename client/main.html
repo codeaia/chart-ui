@@ -1,0 +1,28 @@
+<head>
+  <title>CHART-UI</title>
+</head>
+
+<template name="index">
+    <div class="row">
+        <div class="col-xs-4">
+            <ul class="list-group">
+                {{#each Data}}
+                    {{> list}}
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-xs-8">
+            <div id="chart1" align="center">
+              <div id="blurdiv">
+              </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="list">
+    <li class="list-group-item">
+        <input type="text" name="idp" id="idp" class="idp" value="{{_id}}" hidden>
+        <button name="loadSvg" value="{{_id}}" class="btn btn-primary btn-block loadSvg">{{name}}</button>
+    </li>
+</template>

@@ -1,0 +1,30 @@
+<template name="layout">
+  <div class="container">
+    <header class="navbar navbar-dark bg-inverse navbar-fixed-top" role="banner">
+      <div class="clearfix">
+        <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbarMain">
+           &#9776;
+        </button>
+        <a href="/" class="navbar-brand hidden-sm-up">Anasayfa</a>
+      </div>
+      <div class="collapse navbar-toggleable-xs" id="navbarMain">
+        <nav class="nav navbar-nav">
+          <a href="/" class="nav-item nav-link text-capitalize">Anasayfa</a>
+
+          <div class="dropdown nav-item">
+            <a class="dropdown-toggle nav-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">İşlemler</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <a class="dropdown-item" href="/add">Yeni Kayıt</a>
+              <a class="dropdown-item" href="/barchart">Bar Chart</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="row" style="margin-top: 75px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        {{> yield}}
+      </div>
+    </div>
+  </div>
+</template>
