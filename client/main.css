@@ -32,7 +32,7 @@
 
 .tick text {
   	fill: white;
-	   font-size: 18px;
+	   font-size: 10px;
 }
 .tick line {
     stroke: white;

@@ -27,7 +27,7 @@ coursierprive:tether
 aldeed:autoform
 19degrees:simple-schema-enforcer
 aldeed:collection2
-twbs:bootstrap@=4.0.0-alpha.2
+twbs:bootstrap
 fortawesome:fontawesome
 mrt:moment
 d3js:d3
