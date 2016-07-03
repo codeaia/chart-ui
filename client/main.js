@@ -3,6 +3,16 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
+Template.delete.events({
+    'click .deleteRecord': function(event) {
+        event.preventDefault();
+
+        var idVar = event.currentTarget.getAttribute('value');
+
+        Data.remove(idVar);
+    }
+});
+
 function draw(data){
     d3.select(".chartsvg").remove()
     d=data
@@ -12,16 +22,10 @@ function draw(data){
   			padding = 100;
   			dotRadius = height/50;
   			dotStroke = dotRadius - 2;
-
-
   			innerTickSize = 5;
   			outerTickSize = 2;
 
-
-
-
 //SCALE
-
 
 	var note_scale = d3.scale.linear()
 		.domain([1,d.length])
@@ -33,11 +37,7 @@ function draw(data){
 		.domain([0,100])
 		.range([height,0]);
 
-
-
-
 //ZOOM
-
 
          function zoomed() {
             chartsvg.attr("transform", "translate(" + d3.event.translate + ")" +
@@ -47,21 +47,13 @@ function draw(data){
   				.scaleExtent([0.75,7])
   				.on("zoom",zoomed);
 
-
-
 //BLUR
 		var blurDiv = d3.select("#blurdiv")
   				.style("height", height +padding*2 + "px")
   				.style("width",width + padding*2 +  "px")
   				.attr("align","center");
 
-
-
-
-
-
 //DRAW
-
   			var wholesvg = d3.select("#chart1").append("svg")
   				.attr("height", height+padding*2)
   				.attr("width",width+padding*2)
@@ -73,8 +65,6 @@ function draw(data){
   				.attr('transform', 'translate(' + padding + ',' + padding + ')')
 
   				 //Whole chart
-
-
 
 	//AXISES
 			xAxis = d3.svg.axis().scale(note_scale)

@@ -9,11 +9,18 @@
                 <div class="panel-heading">
                     Records
                 </div>
-                <div class="panel-body">
+                <div class="panel-body text-center">
                     <ul class="list-group">
                         {{#each Data}}
-                        <input type="text" name="idp" id="idp" class="idp" value="{{_id}}" hidden>
-                        <button name="loadSvg" value="{{_id}}" class="btn btn-default btn-block loadSvg">{{name}}</button><br>
+                        <div class="row">
+                            <input type="text" name="idp" id="idp" class="idp" value="{{_id}}" hidden>
+                            <div class="col-xs-8">
+                                <button name="loadSvg" value="{{_id}}" class="btn btn-default btn-block loadSvg">{{name}}</button>
+                            </div>
+                            <div class="col-xs-3">
+                                <a href="/delete/{{_id}}" class="btn btn-danger btn-block" disabled>Delete</a><br>
+                            </div>
+                        </div>
                         {{/each}}
                     </ul>
                 </div>
