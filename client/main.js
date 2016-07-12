@@ -198,35 +198,37 @@ convData=[];
 c=1;
 total =0;
 
-
-    for (var i = 0; i < data.midterm.length; i++) {
-        x = {
-            id: data._id,
-            name: data.name,
-            note: 'Midterm '+(i+1),
-            note1: ""+c,
-            value: ""+data.midterm[i].score
-        };
-        total += x.value*data.midterm[i].ratio/100;
-        convData.push(x);
-        c++;
-
+    if (typeof(data.midterm) != 'undefined') {
+      for (var i = 0; i < data.midterm.length; i++) {
+          x = {
+              id: data._id,
+              name: data.name,
+              note: 'Midterm '+(i+1),
+              note1: ""+c,
+              value: ""+data.midterm[i].score
+          };
+          total += x.value*data.midterm[i].ratio/100;
+          convData.push(x);
+          c++;
+      }
     }
 
-    for (var i = 0; i < data.homework.length; i++) {
-        x = {
-            id: data._id,
-            name: data.name,
-            note: 'HW '+(i+1),
-            note1: ""+c,
-            value: ""+data.homework[i].score
-        };
-        total += x.value*data.homework[i].ratio/100;
-        convData.push(x);
-        c++;
-
+    if (typeof(data.homework) != 'undefined') {
+      for (var i = 0; i < data.homework.length; i++) {
+          x = {
+              id: data._id,
+              name: data.name,
+              note: 'HW '+(i+1),
+              note1: ""+c,
+              value: ""+data.homework[i].score
+          };
+          total += x.value*data.homework[i].ratio/100;
+          convData.push(x);
+          c++;
+      }
     }
 
+    if (typeof(data.quiz) != 'undefined') {
     for (var i = 0; i < data.quiz.length; i++) {
         x = {
             id: data._id,
@@ -238,9 +240,10 @@ total =0;
         total += x.value*data.quiz[i].ratio/100;
         convData.push(x);
         c++;
-
     }
+  }
 
+    if (typeof(data.final) != 'undefined') {
     for (var i = 0; i < data.final.length; i++) {
         x = {
             id: data._id,
@@ -253,6 +256,7 @@ total =0;
         convData.push(x);
         c++;
     }
+  }
     x = {
         id: data._id,
         name: data.name,
@@ -288,7 +292,6 @@ Template.index.events({
         console.log(convertData(data));
 
         draw(convertData(data));
-
 
     }
 });

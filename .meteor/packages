@@ -17,9 +17,9 @@ standard-minifier-js    # JS minifier run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
-
 insecure
 autopublish
+
 service-configuration
 accounts-password
 mizzao:user-status
@@ -32,3 +32,5 @@ fortawesome:fontawesome
 mrt:moment
 d3js:d3
 iron:router
+okgrow:image-upload
+nilsdannemann:pdfmake
