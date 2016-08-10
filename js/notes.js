@@ -3,11 +3,11 @@
 $(document).ready(function(){
 
 //https://raw.githubusercontent.com/codeaia/chart-ui/gh-pages/data1.json
-//http://localhost:8000/data1.json 
-	d3.json("https://raw.githubusercontent.com/codeaia/chart-ui/gh-pages/data1.json", 
+//http://localhost:8000/data1.json
+	d3.json("https://raw.githubusercontent.com/codeaia/chart-ui/gh-pages/data1.json",
 		function(error, data){
 			if (error) return console.warn(error);
-  			d=data 
+  			d=data
   			height = 450;
   			width = 550;
   			padding = 100;
@@ -24,24 +24,26 @@ $(document).ready(function(){
 //SCALE
 
 
-	var note_scale = d3.scale.linear()
-		.domain([1,7])
-		.range([0,width])
+	var note_scale = d3.scale.ordinal()
+		.domain(data.map(function(item){
+				return item.note;
+		}))
+		.rangeBands([0,width])
 		//.range();
 
 	//y scale
 	var value_scale = d3.scale.linear()
 		.domain([0,100])
 		.range([height,0]);
-		
-		
+
+
 
 
 //ZOOM
-		
- 
+
+
          function zoomed() {
-            chartsvg.attr("transform", "translate(" + d3.event.translate + ")" + 
+            chartsvg.attr("transform", "translate(" + d3.event.translate + ")" +
                "scale(" + d3.event.scale + ")");
          };
   			var zoom = d3.behavior.zoom()
@@ -55,14 +57,14 @@ $(document).ready(function(){
   				.style("height", height +padding*2 + "px")
   				.style("width",width + padding*2 +  "px")
   				.attr("align","center");
-  				
+
 
 
 
 
 
 //DRAW
-	
+
   			var wholesvg = d3.select("#chart1").append("svg")
   				.attr("height", height+padding*2)
   				.attr("width",width+padding*2)
@@ -72,30 +74,30 @@ $(document).ready(function(){
   				var chartsvg = wholesvg.append('g')
   				.attr("class","chart")
   				.attr('transform', 'translate(' + padding + ',' + padding + ')')
-  				
+
   				 //Whole chart
-				
+
 
 
 	//AXISES
 			xAxis = d3.svg.axis().scale(note_scale)
 				.orient("bottom")
-				.ticks(7)
+				.ticks(d.length)
 				.tickSize(innerTickSize,outerTickSize)
 
 			yAxis = d3.svg.axis().scale(value_scale)
 				.orient("left")
 				.ticks(10)
 				.tickSize(innerTickSize,outerTickSize)
-			
 
-			 
+
+
 			chartsvg.append("svg:g")
 				.attr("class" , "xaxis")
-				.attr("transform", "translate(40," + height + ")")
+				.attr("transform", "translate(0," + height + ")")
 				.call(xAxis);
-				
-				
+
+
 
 			chartsvg.append("svg:g")
 				.attr("class" , "yaxis")
@@ -103,15 +105,13 @@ $(document).ready(function(){
 				.call(yAxis)
 
 
-			ticks = d3.selectAll(".xaxis .tick text")
-				.data(d)
-				.text(function(d){return d.note});
+
 
 		//LINES
-	
+
 
 			line = d3.svg.line()
-				.x(function(d) {return note_scale(d.note1)})
+				.x(function(d) {return note_scale(d.note)})
 				.y(function(d) {return value_scale(d.value)});
 
 
@@ -135,14 +135,14 @@ $(document).ready(function(){
 
 				dotsg.append("circle")
 					.attr("class","dots")
-					.attr("cx",function(d){return note_scale(d.note1)})
+					.attr("cx",function(d){return note_scale(d.note)})
 					.attr("cy", function(d){return value_scale(d.value)})
 					.attr("r", dotRadius)
-				
+
 				dotsg.append("text")
 					.text(function(d){return d.value})
 					.attr("class","valueText")
-					.attr("x",function(d){return note_scale(d.note1)})
+					.attr("x",function(d){return note_scale(d.note)})
 					.attr("y", function(d){return value_scale(d.value)-25})
 					.style("display","none")
 					.attr("text-anchor", "middle");
@@ -163,13 +163,13 @@ $(document).ready(function(){
 		$(".dots").on('mouseenter',function(){
 				$(this).animate({'stroke': 'rgb(141, 140, 137)','stroke-width': 0},100)
 				$(this).animate({'stroke': 'rgb(255, 173, 6)','stroke-width': dotStroke+3},100)
-							
+
 			})
 
 				$(".dots").on('mouseleave',function(){
 				$(this).animate({'stroke': 'rgb(255, 173, 6)','stroke-width': 0},100)
 				$(this).animate({'stroke': 'rgb(141, 140, 137)','stroke-width': dotStroke},100)
-				
+
 			})
 
 
@@ -202,9 +202,8 @@ $(document).ready(function(){
 
 			setTimeout(a,300);
 
-			
+
 
   		})//end of callback function
 
 })
-
