@@ -8,13 +8,13 @@ $(document).ready(function(){
 		function(error, data){
 			if (error) return console.warn(error);
   			d=data
-  			height = 450;
-  			width = 550;
+  			height = 300;
+  			width = 400;
   			padding = 100;
   			dotRadius = height/50;
   			dotStroke = dotRadius - 2;
 
-
+			
   			innerTickSize = 5;
   			outerTickSize = 2;
 
