@@ -2,6 +2,7 @@
     fill: rgb(95, 170, 10);
     stroke: rgb(255, 255, 255);
     stroke-width: 3;
+    z-index: 99999999;
 }
 
 .yaxis path {
@@ -50,7 +51,7 @@
 }
 
 #chart1{
-
+background-color:rgba(36, 40, 46, .81); 
 }
 
 body{
@@ -60,11 +61,11 @@ body{
 
 }
 
+.area1{
+  fill: rgb(65, 200, 235);
+}
 
-.line{
-	stroke:rgb(65, 200, 235);
-	fill:none;
-	stroke-width: 2;
+.area2{
 }
 
 text{
@@ -80,4 +81,22 @@ text{
 	font-size: 20px;
     fill: rgb(36, 172, 206);
 
+}
+
+.line{
+  fill: none;
+  stroke-width: 1px;
+  stroke:rgb(65, 200, 235);
+  stroke-width: 2;
+}
+
+.navigator .viewport {
+    stroke: grey;
+    fill: black;
+    fill-opacity: 0.2;
+}
+
+.chart .overlay {
+    stroke-width: 0px;
+    fill-opacity: 0;
 }
