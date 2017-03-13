@@ -1,3 +1,4 @@
 .meteor/local
 .meteor/meteorite
 /.project
+node_modules
