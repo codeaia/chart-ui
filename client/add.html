@@ -1,8 +1,12 @@
 <template name="insertBookForm">
-    <div class="panel panel-info">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="panel">
         <div class="panel-heading">New Record</div>
-        <div class="panel-body">
-            {{> quickForm id="dataInsertAhmet" collection="Data" type="insert"}}
+        <div class="panel-body" style="background-color: rgb(12, 212, 146)">
+          {{> quickForm id="dataInsertAhmet" collection="Data" type="insert"}}
         </div>
+      </div>
     </div>
+  </div>
 </template>

@@ -3,34 +3,31 @@
 </head>
 
 <template name="index">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    Records
-                </div>
-                <div class="panel-body text-center">
-                    <ul class="list-group">
-                        {{#each Data}}
-                        <div class="row">
-                            <input type="text" name="idp" id="idp" class="idp" value="{{_id}}" hidden>
-                            <div class="col-xs-8">
-                                <button name="loadSvg" value="{{_id}}" class="btn btn-default btn-block loadSvg">{{name}}</button>
-                            </div>
-                            <div class="col-xs-3">
-                                <a href="/delete/{{_id}}" class="btn btn-danger btn-block" disabled>Delete</a><br>
-                            </div>
-                        </div>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          Records
         </div>
-        <div class="col-md-8">
-            <div id="chart1" align="center">
-              <div id="blurdiv">
-              </div>
-            </div>
+        <div class="panel-body text-center">
+          <ul class="list-group">
+            {{#each Data}}
+              <li class="list-group-item">
+                <input type="text" name="idp" id="idp" class="idp" value="{{_id}}" hidden>
+                <a name="loadSvg" value="{{_id}}" class="btn btn-default loadSvg text-xs-left">{{name}}</a>
+                <a name="loadPdf" value="{{_id}}" class="btn btn-primary loadPdf">Show Pdf</a>
+                <a value="{{_id}}" class="btn btn-danger deletePdf">Delete</a>
+              </li>
+            {{/each}}
+          </ul>
         </div>
+      </div>
     </div>
+    <div class="col-md-8">
+      <div id="chart1" align="center">
+        <div id="blurdiv">
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
